@@ -6,6 +6,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.Lifecycle;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,8 +19,8 @@ import javax.annotation.PreDestroy;
  */
 
 @Component
-public class TestLifeCycleCallBack implements InitializingBean, BeanPostProcessor, ApplicationContextAware, DisposableBean {
-
+//@DependsOn
+public class TestLifeCycleCallBack implements InitializingBean, BeanPostProcessor, ApplicationContextAware, DisposableBean, Lifecycle {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -55,6 +56,24 @@ public class TestLifeCycleCallBack implements InitializingBean, BeanPostProcesso
 	@Override
 	public void destroy() throws Exception {
 		System.out.println("容器销毁时回调 DisposableBean.destroy");
+	}
+
+	@Override
+	public void start() {
+		//context.start() 时回调
+		System.out.println("context.start()时回调 Lifecycle.start");
+	}
+
+	@Override
+	public void stop() {
+		System.out.println("未知 Lifecycle.stop");
+
+	}
+
+	@Override
+	public boolean isRunning() {
+		System.out.println("判断容器是否正在运行 Lifecycle.isRunning");
+		return false;
 	}
 }
 

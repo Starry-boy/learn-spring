@@ -1,4 +1,6 @@
 package com.ratel.learn.customProxy;
 
-public interface UserDao {
+public interface UserService {
+
+	public String query(int id);
 }

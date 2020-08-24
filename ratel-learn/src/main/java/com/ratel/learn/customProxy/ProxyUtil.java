@@ -14,7 +14,6 @@ import java.net.URLClassLoader;
  * @date 2020/8/19
  */
 public class ProxyUtil {
-
 	public static Object newProsyInstance(Object targetObj,Class<?>[] interfaces,InvocationHandler invocationHandler) throws Exception{
 		ClassTemplate classTemplate = new ClassTemplate(targetObj);
 		String path = targetObj.getClass().getResource("").getPath()+classTemplate.realSimpleClassName+ ".java";

@@ -308,10 +308,15 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 	 * @return a corresponding Set of autodetected bean definitions
 	 */
 	public Set<BeanDefinition> findCandidateComponents(String basePackage) {
+		/*
+		 如果没有导入 spring-context-indexer 项目就不会走这行代码
+		 这行是通过缓存提高 Spring 扫描类的速度
+		 */
 		if (this.componentsIndex != null && indexSupportsIncludeFilters()) {
 			return addCandidateComponentsFromIndex(this.componentsIndex, basePackage);
 		}
 		else {
+			//真正的从磁盘上扫描类
 			return scanCandidateComponents(basePackage);
 		}
 	}
